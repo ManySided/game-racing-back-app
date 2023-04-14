@@ -1,0 +1,38 @@
+server:
+  port:
+    8185
+  servlet:
+    context-path: "/racing"
+
+spring:
+  application:
+    name: racing
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: core
+    password: 1xbn1URIwB
+    url: jdbc:postgresql://localhost:5432/coredb
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        default_schema: sp
+        dialect: org.hibernate.dialect.PostgresPlusDialect
+    show-sql: true
+  security:
+    user:
+      name: admin
+      password: 2tTX107x6eJLRfA7
+  session:
+    store-type: jdbc
+
+#rsa keys
+rsa:
+  private-key: classpath:certs/private.pem
+  public-key: classpath:certs/public.pem
+
+logging:
+  level:
+    org.springframework: ERROR
+    com.mkyong: DEBUG
