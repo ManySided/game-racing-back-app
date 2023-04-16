@@ -22,9 +22,9 @@ CREATE TABLE sp.user_role
     primary key (role_id)
 );
 
-INSERT INTO sp.user_role (role_id, name) VALUES
-                                             ('c305cf09-0afe-4cca-9475-bd9ff77c0ecc','usr'),
-                                             ('20029204-9c4f-4dd5-8862-c1821b7418d7','adm')
+INSERT INTO sp.user_role (role_id, name)
+VALUES ('c305cf09-0afe-4cca-9475-bd9ff77c0ecc', 'usr'),
+       ('20029204-9c4f-4dd5-8862-c1821b7418d7', 'adm')
 ;
 
 --changeset parshakov-as:20230401-03 failOnError:true
