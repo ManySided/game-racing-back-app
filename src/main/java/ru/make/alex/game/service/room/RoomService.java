@@ -5,6 +5,7 @@ import ru.make.alex.game.web.dto.room.RoomDto;
 
 import java.util.UUID;
 
+
 public interface RoomService {
     String createRoom(RoomDto dto);
 

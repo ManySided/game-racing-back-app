@@ -54,7 +54,14 @@ public class RoomServiceImpl implements RoomService {
     @Transactional
     public PlayerRoomDto joinRoom(UUID roomId) {
         var userLogin = SecurityHelper.getCurrentLogin();
+        var userId = userProfileService.getUserId();
         log.info("user [{}] wants to join the room [{}]", userLogin, roomId);
+        var playerResponse = playerRoomRepository.findByUserPlayerAndLeaveDateIsNull(userId);
+        if (!playerResponse.isEmpty()) {
+            log.info("user [{}] is already in the room [{}]", userId, playerResponse.get(0).getRoom());
+            throw new GameDuringException("The user is already in the room");
+        }
+
         roomRepository.findById(roomId)
                 .orElseThrow(() -> new NotFoundException("room [" + roomId + "] not found"));
 
@@ -69,7 +76,7 @@ public class RoomServiceImpl implements RoomService {
 
         var player = playerRoomRepository.save(PlayerRoom.builder()
                 .joinDate(OffsetDateTime.now())
-                .userPlayer(userProfileService.getUserId())
+                .userPlayer(userId)
                 .room(roomId)
                 .build());
         log.info("user [{}] added to room [{}]. Player [{}]", userLogin, roomId, player.getId());
